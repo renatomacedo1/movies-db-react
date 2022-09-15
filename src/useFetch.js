@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const API_ENDPOINT = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_MOVIE_API_KEY}`;
 
@@ -14,21 +14,21 @@ const useFetch = (urlParams) => {
       const data = await response.json();
 
       if (data.Response === "True") {
-        console.log(data);
         setData(data.Search || data);
         setError({ show: false, msg: "" });
         setIsLoading(false);
       } else {
         setError({ show: true, msg: data.Error });
       }
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
+    // eslint-disable-next-line
   };
 
   useEffect(() => {
     fetchMovies(`${API_ENDPOINT}${urlParams}`);
+    // eslint-disable-next-line
   }, [urlParams]);
 
   return { isLoading, error, data };
